@@ -7,6 +7,7 @@
 
 <script>
 import { defineComponent } from "vue";
+import { useAuth0 } from "@auth0/auth0-vue";
 
 // Components
 import NavBar from "../components/Nav-bar.vue";
@@ -18,6 +19,17 @@ export default defineComponent({
   components: {
     NavBar,
     ParticleEarth,
+  },
+  setup() {
+    const { loginWithRedirect, user, isAuthenticated } = useAuth0();
+
+    return {
+      login: () => {
+        loginWithRedirect();
+      },
+      user,
+      isAuthenticated,
+    };
   },
 });
 </script>
